@@ -3,6 +3,7 @@ import logo from './logo.svg';
 // import first of all...
 import {Navbar, NavbarBrand} from 'reactstrap';
 import './App.css';
+import Menu from './components/MenuComponent';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
             <NavbarBrand href='/'>
                 Hello, FOSS Contributor...
             </NavbarBrand>
+            <Menu />
         </div>
       </Navbar>
     </div>
