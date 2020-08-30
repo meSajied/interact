@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 // import first of all...
 import {Navbar, NavbarBrand} from 'reactstrap';
-import {DISHES} from "../shared/dishes";
+import {DISHES} from "./shared/dishes";
 import './App.css';
 import Menu from './components/MenuComponent';
 
