@@ -23,6 +23,10 @@ class Dishdetails extends Component {
     }
 
     renderComments(comments) {
+        {new Intl.DateTimeFormat('en-US',
+            { year: 'numeric', month: 'short', day: '2-digit'})
+            .format(new Date(Date.parse(comments.date)))}
+
         if (comments != null) {
             const mapped = comments.map((comment) => {
                 return (
