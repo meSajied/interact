@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Menu from './MenuComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent'
 import Dishdetails from "./Dishdetails";
 import { DISHES } from '../shared/dishes';
+import Home from './HomeComponent';
 import Card from "reactstrap/lib/Card";
 
 class Main extends Component {
@@ -22,7 +24,27 @@ class Main extends Component {
 	}
 
 	render() {
+
+		const HomePage = () => {
+			return(
+				<Home />
+			);
+		}
+
 		return (
+
+			<div>
+				<Header />
+				<Switch>
+					<Route path='/home' component={HomePage} />
+					<Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
+					<Redirect to="/home" />
+				</Switch>
+				<Footer />
+			</div>
+
+			/*
+			commented for new task...
 			<div>
 				<Navbar dark color="primary">
 					<div className="container">
@@ -36,6 +58,7 @@ class Main extends Component {
 					dish.id === this.state.selectedDish)[0]} />
 				<Footer />
 			</div>
+			 */
 		);
 	}
 }
