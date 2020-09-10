@@ -28,19 +28,19 @@ class Dishdetails extends Component {
                         <Breadcrumb>
 
                             <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                            <BreadcrumbItem active>{this.dish.name}</BreadcrumbItem>
                         </Breadcrumb>
                         <div className="col-12">
-                            <h3>{props.dish.name}</h3>
+                            <h3>{this.dish.name}</h3>
                             <hr />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-12 col-md-5 m-1">
-                            <RenderDish dish={props.dish} />
+                            <RenderDish dish={this.dish} />
                         </div>
                         <div className="col-12 col-md-5 m-1">
-                            <RenderComments comments={props.comments} />
+                            <RenderComments comments={this.comments} />
                         </div>
                     </div>
                 </div>
