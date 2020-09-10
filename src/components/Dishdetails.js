@@ -2,9 +2,23 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {DISHES} from "../shared/dishes";
+import {COMMENTS} from "../shared/comments";
+import {PROMOTIONS} from "../shared/promotions";
+import {LEADERS} from "../shared/leaders";
 
 
 class Dishdetails extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            dishes: DISHES,
+            comments: COMMENTS,
+            promotions: PROMOTIONS,
+            leaders: LEADERS
+        };
+    }
 
     renderDish(dish) {
         if (dish != null)
