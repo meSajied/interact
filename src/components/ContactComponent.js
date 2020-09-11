@@ -229,5 +229,5 @@ class Contact extends Component{
         );
     }
 }
-
+/* for controlled form*/
 export default Contact;
