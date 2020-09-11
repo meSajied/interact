@@ -6,6 +6,10 @@ import {DISHES} from "./shared/dishes";
 import './App.css';
 import Menu from './components/MenuComponent';
 import Main from './components/MainComponent';
+import { Provider } from 'react-redux';
+import { ConfigureStore } from './redux/configureStore';
+
+const store = ConfigureStore();
 
 class App extends Component {
     /*
@@ -19,18 +23,20 @@ class App extends Component {
     render() {
         return (
 
-            <div className="App">
-                <div className="App">
-                    <Main />
-                </div>
-
-                {/* no need when main component works... */}
-                {/* <Navbar dark color={'primary'}>
+            <Provider>
+                <BrowserRouter>
+                    <div className="App">
+                        <Main />
+                        {/* no need when main component works... */}
+                        {/* <Navbar dark color={'primary'}>
                     <div className='container'>
                         <Menu dishes={this.state.dishes} />
                     </div>
                 </Navbar> */}
-            </div>
+                    </div>
+                </BrowserRouter>
+            </Provider>
+
         );
     }
 };
