@@ -12,6 +12,7 @@ import { PROMOTIONS } from '../shared/promotions';
 import { COMMENTS } from '../shared/comments';
 import { LEADERS } from '../shared/leaders';
 import Home from './HomeComponent';
+import { addComment } from '../redux/ActionCreators';
 import Card from "reactstrap/lib/Card";
 import { connect } from 'react-redux';
 
@@ -23,6 +24,13 @@ const mapStateToProps = state => {
 		leaders: state.leaders
 	}
 }
+
+const mapDispatchToProps = dispatch => ({
+
+	addComment: (dishId, rating, author, comment) =>
+		dispatch(addComment(dishId, rating, author, comment))
+
+});
 
 class Main extends Component {
 
@@ -60,7 +68,8 @@ class Main extends Component {
 				<Dishdetails dish={this.props.dishes.filter((dish) =>
 					dish.id === parseInt(match.params.dishId,10))[0]}
 		            comments={this.props.comments.filter((comment) =>
-		            comment.dishId === parseInt(match.params.dishId,10))} />
+		            comment.dishId === parseInt(match.params.dishId,10))}
+                    addComment={this.props.addComment} />
 			);
 		};
 
@@ -102,4 +111,4 @@ class Main extends Component {
 	}
 }
 
-export default Main;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

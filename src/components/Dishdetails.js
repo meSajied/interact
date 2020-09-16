@@ -47,7 +47,8 @@ function RenderComments({comments, addComment, dishId}){
                 <ul className="list-unstyled">
                     {list}
                 </ul>
-                <CommentForm dishId={dishId} addComment={addComment}>
+                <CommentForm dishId={dishId}
+                     addComment={addComment}>
 
                 </CommentForm>
             </div>
