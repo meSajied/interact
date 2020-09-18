@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { actions } from 'react-redux-form';
 import Menu from './MenuComponent';
 import Header from './HeaderComponent';
 import About from './AboutComponent';
@@ -29,7 +30,9 @@ const mapDispatchToProps = dispatch => ({
 
 	addComment: (dishId, rating, author, comment) =>
 		dispatch(addComment(dishId, rating, author, comment)),
-	fetchDishes: () => { dispatch(fetchDishes())}
+	fetchDishes: () => { dispatch(fetchDishes())},
+	// added feed back for redux-form...
+	resetFeedbackForm: () => { dispatch(actions.reset('feedback'))}
 
 });
 
@@ -91,7 +94,9 @@ class Main extends Component {
 						<Route exact path='/menu' component={() =>
 							<Menu dishes={this.props.dishes} />} />
 						<Route path='/menu/:dishId' component={DishWithId} />
-						<Route exact path='/contactus' component={Contact} />} />
+						// added feedback form...
+						<Route exact path='/contactus' component={() =>
+							<Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
 						<Redirect to="/home" />
 					</Switch>
 				</div>
