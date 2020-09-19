@@ -14,12 +14,29 @@ export const addComment = (dishId, rating, author, comment) => ({
 });
 
 export const fetchDishes = () => (dispatch) => {
-    dispatch(dishesLoading(true));
 
+    dispatch(dishesLoading(true));
     // fetch is used for fetching data from server...
     return fetch(baseUrl + 'dishes')
+        // error handling...
+        .then(response => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    var error = new Error('Error '
+                        + response.status + ': ' + response.statusText);
+                    error.response = response;
+                    throw error;
+                }
+            },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
         .then(response => response.json())
-        .then(dishes => dispatch(addDishes(dishes)));
+        .then(dishes => dispatch(addDishes(dishes)))
+        .catch(error => dispatch(dishesFailed(error.message)));
+
     /*
     setTimeout(() => {
         dispatch(addDishes(DISHES));
@@ -56,8 +73,24 @@ export const fetchPromos = () => (dispatch) => {
     dispatch(promosLoading());
 
     return fetch(baseUrl + 'promotions')
+        // error handling...
+        .then(response => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    var error = new Error('Error '
+                        + response.status + ': ' + response.statusText);
+                    error.response = response;
+                    throw error;
+                }
+            },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
         .then(response => response.json())
-        .then(promos => dispatch(addPromos(promos)));
+        .then(promos => dispatch(addPromos(promos)))
+        .catch(error => dispatch(promosFailed(error.message)));
 }
 
 export const promosLoading = () => ({
