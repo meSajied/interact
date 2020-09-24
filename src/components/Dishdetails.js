@@ -4,6 +4,7 @@ import { Card, CardImg, CardText, CardBody,
     Modal, ModalHeader, ModalBody, Form, FormGroup,
     Input, Label, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import {Loading} from "./LoadingComponent";
 import { baseUrl } from '../shared/baseUrl';
@@ -11,6 +12,12 @@ import { baseUrl } from '../shared/baseUrl';
 function RenderDish({dish}) {
     return(
         <div className="col-12 col-md-5 m-1">
+            {/* for real animation... */}
+            <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
             <Card>
                 {/* <CardImg width="100%" src={dish.image} alt={dish.name} /> */}
                 <CardImg top src={baseUrl + dish.image} alt={dish.name} />
@@ -19,30 +26,36 @@ function RenderDish({dish}) {
                     <CardText>{dish.description}</CardText>
                 </CardBody>
             </Card>
+            </FadeTransform>
         </div>
     )
 }
 
 function RenderComments({comments, postComment, dishId}){
     if (comments != null) {
+        // for running animation...
+        <Stagger in>
+            let list = comments.map((comments)=>{
 
-        let list = comments.map((comments)=>{
+                return(
+                    // run specific animation...
+                    <Fade in>
+                        <li key={comments.id} >
+                            <div>
+                                <p>{comments.comment}</p>
+                                <p>--{comments.author},
+                                    {new Intl.
+                                    DateTimeFormat('en-US',
+                                        { year: 'numeric', month: 'short',
+                                            day: '2-digit'}).
+                                    format(new Date(Date.parse(comments.date)))}</p>
+                            </div>
+                        </li>
+                    </Fade>
 
-            return(
-                <li key={comments.id} >
-                    <div>
-                        <p>{comments.comment}</p>
-                        <p>--{comments.author},
-                            {new Intl.
-                            DateTimeFormat('en-US',
-                                { year: 'numeric', month: 'short',
-                                    day: '2-digit'}).
-                            format(new Date(Date.parse(comments.date)))}</p>
-                    </div>
-                </li>
-
-            )
-        })
+                )
+            })
+        </Stagger>
 
         return(
             <div className="col-12 col-md-5 m-1">
