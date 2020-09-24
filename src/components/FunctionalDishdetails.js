@@ -51,11 +51,11 @@ function RenderComments(comments) {
     }
 }
 
-const DishDetails = (props) {
+const DishDetails = (this.props) {
     if(props.dish == null)
         return (<div></div>)
 
-    <RenderDish dish={props.dish} />
+    <RenderDish dish={this.props.dish} />
 <RenderComments comments={props.dish.comments} />
     return (
         <div className="row">
