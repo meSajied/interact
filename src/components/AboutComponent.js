@@ -2,6 +2,9 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card,
 	CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Fade, Stagger } from "react-animation-components";
+import { baseUrl } from "../shared/baseUrl";
+import { Loading } from "./LoadingComponent";
 
 function About(props) {
 
@@ -17,7 +20,7 @@ function About(props) {
 			<div key={leader.id} className="col-12 mt-5">
 				<Media tag="li" >
 					<Media left middle>
-						<Media object src={leader.image}
+						<Media object src={baseUrl + leader.image}
 						       alt={leader.name} />
 					</Media>
 					<Media body className="ml-5">
@@ -28,6 +31,23 @@ function About(props) {
 				</Media>
 			</div>
 		);
+	}
+
+	function RenderContent({ leaders, isLoading, errMess }) {
+		if (isLoading) {
+			return <Loading />;
+		} else if (errMess) {
+			return <h4>{errMess}</h4>;
+		} else
+			return (
+				<Stagger in>
+					{props.leaders.map(leader => (
+						<Fade in key={leader.id}>
+							<RenderLeader key={leader.id} leader={leader} />
+						</Fade>
+					))}
+				</Stagger>
+			);
 	}
 
 	return(
